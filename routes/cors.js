@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
-const whitelist = ['http://localhost:3000', 'https://localhost:3443','http://localhost:3006','http://desktop-d6scll9:3006'];
+const whitelist = ['http://localhost:3000', 'https://localhost:3443','http://localhost:3006','https://restaurantclient.netlify.app'];
 var corsOptionsDelegate = (req, callback) => {
     var corsOptions;
     console.log(req.header('Origin'));
