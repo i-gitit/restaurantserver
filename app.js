@@ -24,7 +24,11 @@ const Dishes = require('./models/dishes');
 const mongoose = require('mongoose');
 const { base } = require('./models/dishes');
 const url = config.mongoUrl;
-const connect = mongoose.connect(url);
+const connect = mongoose.connect(url,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
 
 connect.then((db)=>{
   console.log('Connected to the server successfully');
@@ -41,14 +45,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(passport.initialize());
 
 // Secure traffic only
-app.all('*', (req, res, next) => {
-  if (req.secure) {
-    return next();
-  }
-  else {
-    res.redirect(307, 'https://' + req.hostname + ':' + app.get('secPort') + req.url);
-  }
-});
+// app.all('*', (req, res, next) => {
+//   if (req.secure) {
+//     return next();
+//   }
+//   else {
+//     res.redirect(307, 'https://' + req.hostname + ':' + app.get('secPort') + req.url);
+//   }
+// });
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
